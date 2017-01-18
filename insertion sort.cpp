@@ -6,8 +6,8 @@ int main(void)
 {
 	int i,j,n,key;
 	printf("Please input the number of data\n");
-	scanf("%d",&n);
-	if (n<=0) {printf("error:input invalid");return 1;}
+	scanf("%d",&n); 
+	if (n<=0) {printf("error:input invalid\n");return 1;}
 	printf("Please input the data\n");
 	for (i=0;i<n;i++)
 		scanf("%d",&s[i]);
