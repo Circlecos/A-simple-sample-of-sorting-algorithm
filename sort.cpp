@@ -1,8 +1,9 @@
 #include "sort.h"
+#include <math.h>
 #ifndef N
 #define N 1000
 #endif
-int InsertionSort(int n,int* x)
+int InsertionSort(int n,int *x)
 {
 	int key,i=0,j=0;
 	for (j=1;j<n;j++)
@@ -19,7 +20,7 @@ int InsertionSort(int n,int* x)
 	return 0;
 }
 
-int ShellSort(int n,int* x)
+int ShellSort(int n,int *x)
 {
 	int gap,i=0,j=0,k,key;
 	for (gap=n/2;gap>0;gap/=2)
@@ -42,7 +43,7 @@ int ShellSort(int n,int* x)
 	return 0;
 }
 
-int CountingSort(int n,int k,int* x)
+int CountingSort(int n,int k,int *x)
 {
 	int i=0,j=0,c[N],y[N];
 	for (i=0;i<=k;i++)
@@ -61,7 +62,7 @@ int CountingSort(int n,int k,int* x)
 	return 0;
 }
 
-int SelectionSort(int n,int* x)
+int SelectionSort(int n,int *x)
 {
 	int swap,i=0,j=0,min;
 	for (i=0;i<n-1;i++)
@@ -74,7 +75,7 @@ int SelectionSort(int n,int* x)
 	return 0;
 }
 
-int BubbleSort(int n,int* x)
+int BubbleSort(int n,int *x)
 {
 	int i=0,j=0,swap;
 	for (j=0;j<n-1;j++)
@@ -86,51 +87,82 @@ int BubbleSort(int n,int* x)
 	return 0;
 }
 
-int QuickSort(int *a,int l,int r)
+int QuickSort(int *x,int l,int r)
 {
 	int i=0,j=0,key;
 	
 	if (l >=r ) return 0;
-	i=l;j=r;key=a[i];
+	i=l;j=r;key=x[i];
 	while (i<j)
 	{
-		while ((i<j)&&(key<=a[j]))
+		while ((i<j)&&(key<=x[j]))
 			j--;
-		a[i]=a[j];
-		while ((i<j)&&(key>=a[i]))
+		x[i]=x[j];
+		while ((i<j)&&(key>=x[i]))
 			i++;
-		a[j]=a[i];
+		x[j]=x[i];
 	}
-	a[i]=key;
-	QuickSort(a,l,i-1);
-	QuickSort(a,i+1,r);
+	x[i]=key;
+	QuickSort(x,l,i-1);
+	QuickSort(x,i+1,r);
 	return 0;
 }
-int Merge(int *a,int p,int q,int r);
-int MergeSort(int *a,int le,int ri)
+int Merge(int *x,int p,int q,int r);
+int MergeSort(int *x,int le,int ri)
 {
 	int q;
 	if (le<ri)
 	{
 		q=(le+ri)/2;
-		MergeSort(a,le,q);
-		MergeSort(a,q+1,ri);
-		Merge(a,le,q+1,ri);
+		MergeSort(x,le,q);
+		MergeSort(x,q+1,ri);
+		Merge(x,le,q+1,ri);
 	}
 }
-int Merge(int *a,int p,int q,int rig)
+int Merge(int *x,int p,int q,int rig)
 {
 	int i,j,n1,n2,l[N],r[N],k;
 	n1=q-p;
 	n2=rig-q+1;
 	for (i=0;i<n1;i++)
-		l[i]=a[p+i];
+		l[i]=x[p+i];
 	for (i=0;i<n2;i++)
-		r[i]=a[q+i];
+		r[i]=x[q+i];
 	l[n1]=99999999;
 	r[n2]=99999999;
 	i=0;j=0;
 	for (k=p;k<=rig;k++)
-		if (l[i]<=r[j]) { a[k]=l[i];i++; }
-		else { a[k]=r[j];j++; }
+		if (l[i]<=r[j]) { x[k]=l[i];i++; }
+		else { x[k]=r[j];j++; }
+}
+int RadixSort(int *x,int n)
+{
+	int dig[N];
+	int di=1,k=0,flag=1,wid;//1 still have a number having k on digit i
+	while (flag==1)
+	{
+		flag=0;
+		wid=pow(10,di);
+		for (k=0;k<n;k++)
+		{
+			dig[k]=(x[k]/(wid/10))%10;
+			if (x[k]/wid!=0) flag=1;
+		}	
+		int i=0,j=0,c[N],y[N];
+		for (i=0;i<=10;i++)
+			c[i]=0;
+		for (j=0;j<n;j++)
+			c[dig[j]]++;
+		for (i=1;i<=10;i++)	
+			c[i]=c[i]+c[i-1];
+		for (j=n-1;j>=0;j--)
+		{
+			y[c[dig[j]]-1]=x[j];
+			c[dig[j]]=c[dig[j]]-1;
+		}
+		for (i=0;i<n;i++)
+			x[i]=y[i];
+		di++;
+	}
+	return 0;
 }

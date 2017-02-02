@@ -18,7 +18,7 @@ int main(void)
 	printf("Finish. Which algorithm do you want to use?\n");
 	printf("1:InsertionSort\n2:ShellSort\n3:CountingSort\n");
 	printf("4:SelectionSort\n5:BubbleSort\n6:QuickSort\n");
-	printf("7:MergeSort\n");
+	printf("7:MergeSort\n8:RadixSort\n");
 	scanf("%d",&order);	
 
 	switch (order)
@@ -30,6 +30,7 @@ int main(void)
 		case 5:BubbleSort(n,s);break;
 		case 6:QuickSort(s,0,n-1);break;
 		case 7:MergeSort(s,0,n-1);break;
+		case 8:RadixSort(s,n);break;
 	}
 	
 
