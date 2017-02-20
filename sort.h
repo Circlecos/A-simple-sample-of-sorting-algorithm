@@ -9,4 +9,6 @@ int BubbleSort(int n,int *arr);
 int QuickSort(int *arr,int l,int r);
 int MergeSort(int *arr,int l,int r);
 int RadixSort(int *arr,int n);
+int BucketSort(int *arr,int minnum,int maxnum,int num);
+
 #endif

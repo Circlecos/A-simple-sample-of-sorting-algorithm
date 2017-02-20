@@ -135,6 +135,7 @@ int Merge(int *x,int p,int q,int rig)
 		if (l[i]<=r[j]) { x[k]=l[i];i++; }
 		else { x[k]=r[j];j++; }
 }
+
 int RadixSort(int *x,int n)
 {
 	int dig[N];
@@ -163,6 +164,54 @@ int RadixSort(int *x,int n)
 		for (i=0;i<n;i++)
 			x[i]=y[i];
 		di++;
+	}
+	return 0;
+}
+
+int b[N][N]={0},next[N]={0};
+
+int BucketSort(int *a,int min,int max,int n)
+{
+	int i,length=0,step=1,left=0,right=0;
+
+	for (i=0;;i++)
+		if ((10*i<=max)&&(max<=10*(i+1)))
+		{
+			right=i+1;
+			break;
+		}
+
+	for (i=0;;i++)
+		if ((10*i<=min)&&(min<=10*(i+1)))
+		{
+			left=i;
+			break;
+		}
+
+	length=right-left+1;
+	step=static_cast<int>((max-min)/length);
+
+	int j;
+	for (i=0;i<n;i++)
+	{
+		j=0;
+		while (!((min+step*j<=a[i])&&(min+step*(j+1))))
+		{
+			j++;
+		}
+		b[j][next[j]]=a[i];
+		next[j]++;
+	}
+	for (i=0;i<length;i++)
+		InsertionSort(next[i],b[i]);
+	int now=0;
+	for (i=0;i<length;i++)
+	{
+		for (j=0;j<next[i];j++)
+		{
+			a[now]=b[i][j];
+			now++;
+		}
 	}
 	return 0;
 }

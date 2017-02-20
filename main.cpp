@@ -5,7 +5,7 @@
 int s[N]; 
 int main(void)
 {
-	int i,j,n,order,maxn=-99999999;
+	int i,j,n,order,maxn=-99999999,minn=99999999;
 	printf("Please input the number of data\n");
 	scanf("%d",&n);
 	if (n<=0) {printf("error:input invalid");return 1;}
@@ -14,11 +14,12 @@ int main(void)
 		{
 			scanf("%d",&s[i]);
 			if (s[i]>maxn) maxn=s[i];
+			if (s[i]<minn) minn=s[i];
 		}
 	printf("Finish. Which algorithm do you want to use?\n");
 	printf("1:InsertionSort\n2:ShellSort\n3:CountingSort\n");
 	printf("4:SelectionSort\n5:BubbleSort\n6:QuickSort\n");
-	printf("7:MergeSort\n8:RadixSort\n");
+	printf("7:MergeSort\n8:RadixSort\n9:BucketSort\n");
 	scanf("%d",&order);	
 
 	switch (order)
@@ -31,6 +32,7 @@ int main(void)
 		case 6:QuickSort(s,0,n-1);break;
 		case 7:MergeSort(s,0,n-1);break;
 		case 8:RadixSort(s,n);break;
+		case 9:BucketSort(s,minn,maxn,n);break;
 	}
 	
 
