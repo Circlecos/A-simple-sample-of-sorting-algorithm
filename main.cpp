@@ -20,6 +20,7 @@ int main(void)
 	printf("1:InsertionSort\n2:ShellSort\n3:CountingSort\n");
 	printf("4:SelectionSort\n5:BubbleSort\n6:QuickSort\n");
 	printf("7:MergeSort\n8:RadixSort\n9:BucketSort\n");
+	printf("10:HeapSort\n");
 	scanf("%d",&order);	
 
 	switch (order)
@@ -33,6 +34,7 @@ int main(void)
 		case 7:MergeSort(s,0,n-1);break;
 		case 8:RadixSort(s,n);break;
 		case 9:BucketSort(s,minn,maxn,n);break;
+		case 10:HeapSort(s,n);
 	}
 	
 

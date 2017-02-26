@@ -10,5 +10,5 @@ int QuickSort(int *arr,int l,int r);
 int MergeSort(int *arr,int l,int r);
 int RadixSort(int *arr,int n);
 int BucketSort(int *arr,int minnum,int maxnum,int num);
-
+int HeapSort(int *arr,int n);
 #endif

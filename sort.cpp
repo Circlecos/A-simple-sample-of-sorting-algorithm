@@ -1,4 +1,5 @@
 #include "sort.h"
+#include "heapsort.h"
 #include <math.h>
 #ifndef N
 #define N 1000
@@ -213,5 +214,29 @@ int BucketSort(int *a,int min,int max,int n)
 			now++;
 		}
 	}
+	return 0;
+}
+
+int HeapSize;
+int HeapLength;
+
+int HeapSort(int *arr,int n)
+{
+	HeapLength=n;
+	int b[N],i,temp;
+
+	ChangeArray(arr,b,n);
+	BuildMaxHeap(b);
+	
+	for (i=HeapLength;i>=2;i--)
+	{
+		temp=b[1];
+        b[1]=b[i];
+        b[i]=temp;
+		HeapSize-=1;
+		MaxHeapify(b,1);
+	}
+
+	RecoverArray(b,arr,n);
 	return 0;
 }
